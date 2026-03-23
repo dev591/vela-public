@@ -1,0 +1,82 @@
+:root {
+  --black:      #0C0C0B;
+  --white:      #FAFAF9;
+  --off-white:  #F5F3EE;
+  --gold:       #C8B89A;
+  --gold-light: #DDD0BC;
+  --text:       #0C0C0B;
+  --text-muted: #6B6B6B;
+  --border:     #E8E6E1;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Geist', sans-serif;
+  font-weight: 400;
+  color: var(--text);
+  background: var(--white);
+  -webkit-font-smoothing: antialiased;
+  cursor: none;
+}
+
+/* CUSTOM CURSOR */
+.cursor-dot {
+  width: 5px;
+  height: 5px;
+  background: var(--black);
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 99999;
+  transition: transform 0.1s;
+}
+
+.cursor-ring {
+  width: 32px;
+  height: 32px;
+  border: 1px solid var(--black);
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 99998;
+  opacity: 0.4;
+  transition: transform 0.2s, opacity 0.2s;
+}
+
+/* On hover interactive elements */
+a:hover ~ .cursor-dot, button:hover ~ .cursor-dot, .interactive:hover ~ .cursor-dot {
+  transform: scale(3);
+  opacity: 0.2;
+}
+
+a:hover ~ .cursor-ring, button:hover ~ .cursor-ring, .interactive:hover ~ .cursor-ring {
+  transform: scale(1.5);
+  opacity: 0.15;
+}
+
+/* CUSTOM SCROLLBAR */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: var(--gold);
+  border-radius: 2px;
+}
+
+/* TEXT SELECTION */
+::selection {
+  background: var(--gold-light);
+  color: var(--black);
+}
+
+/* REMOVE DEFAULT FOCUS OUTLINE FOR MOUSE, KEEP FOR KEYBOARD */
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* INITIAL REVEAL STATE (Optional, can also handle completely in GSAP fromTo) */
+/* We'll handle this in GSAP fromTo directly to avoid FOUC issues */

@@ -1,0 +1,91 @@
+:root {
+  --black:        #020617; /* Slate-950 base */
+  --black: #F5F5F7; /* Apple Silver Background */
+  --white: #1D1D1F; /* Apple Dark Text */
+  --gold: #0066CC; /* Apple Link Blue */
+  --border-dark: rgba(0,0,0,0.08);
+  --border: rgba(0,0,0,0.04);
+  --text: #1D1D1F;
+  --text-muted: #86868B;
+  --text-faint: #A1A1A6;
+  --off-white: #FFFFFF; /* Pure white for cards */
+}
+
+/* Base resets & typography */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: auto; }
+body {
+  background-color: var(--black);
+  color: var(--white);
+  font-family: 'Geist', sans-serif;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  cursor: none;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--black); }
+::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.15); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(0,0,0,0.3); }
+
+/* Text Selection */
+::selection { background: var(--gold); color: #fff; }
+
+/* CUSTOM CURSOR */
+.cursor-dot {
+  width: 6px; height: 6px;
+  background: var(--gold);
+  border-radius: 50%;
+  position: fixed;
+  top: 0; left: 0;
+  pointer-events: none;
+  z-index: 999999;
+  will-change: transform;
+}
+
+.cursor-ring {
+  width: 48px; height: 48px;
+  border: 1px solid rgba(0,102,204,0.3);
+  border-radius: 50%;
+  position: fixed;
+  top: 0; left: 0;
+  pointer-events: none;
+  z-index: 999998;
+  will-change: transform, width, height;
+  transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1), height 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease-out, background 0.4s ease-out;
+  margin-top: -24px;
+  margin-left: -24px;
+  background: rgba(0, 102, 204, 0.05);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+.cursor-ring.hovering { width: 64px; height: 64px; margin-top: -32px; margin-left: -32px; background: rgba(0, 102, 204, 0.1); border-color: rgba(0, 102, 204, 0.5); }
+.cursor-ring.clicking { width: 36px; height: 36px; margin-top: -18px; margin-left: -18px; background: rgba(0, 102, 204, 0.2); }
+
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* GSAP Utils */
+.reveal, .reveal-left, .reveal-right { visibility: hidden; }
+
+/* Fluid Mesh Animation */
+@keyframes meshFluid {
+  0% { transform: rotate(0deg) scale(1); }
+  50% { transform: rotate(180deg) scale(1.2); }
+  100% { transform: rotate(360deg) scale(1); }
+}
+.mesh-bg {
+  position: absolute;
+  top: -50%; left: -50%; right: -50%; bottom: -50%;
+  background: radial-gradient(circle at 50% 50%, rgba(0, 102, 204, 0.15), transparent 60%),
+              radial-gradient(circle at 80% 20%, rgba(90, 190, 255, 0.15), transparent 50%),
+              radial-gradient(circle at 20% 80%, rgba(0, 50, 200, 0.1), transparent 50%);
+  filter: blur(80px);
+  animation: meshFluid 20s linear infinite;
+  z-index: 0;
+  pointer-events: none;
+}
